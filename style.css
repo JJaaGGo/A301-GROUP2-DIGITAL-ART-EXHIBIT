@@ -1,0 +1,613 @@
+/* global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* root elements/global font choices and colors */
+:root {
+    --main-color: #272137;
+    --accent-color: #655592;
+    --light-bg: #fafafa;
+    --text-gray: #777;
+    --font-primary: "Anonymous Pro", monospace;
+    --font-secondary: "Didact Gothic", sans-serif;
+}
+
+
+
+/* ===========================
+    SHARED STYLING
+=========================== */
+
+/* text styles */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--main-color);
+    font-family: var(--font-primary);
+    font-weight: 600;
+}
+p {
+    font-family: var(--font-secondary);
+    color: var(--main-color);
+    line-height: 1.6;
+}
+
+/* body default style */
+body {
+    background-color: #fdfdfd;
+    color: var(--main-color);
+    line-height: 1.6;
+}
+section {
+    padding: 2rem;
+}
+
+/* logo componentss*/
+.logo {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-style: normal;
+    color: var(--main-color);
+}
+
+footer, header {
+    background: #fff;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #fff, 0 0 20px #0a0a0a; }
+  to { text-shadow: 0 0 10px #000000, 0 0 30px #ffffff; }
+}
+
+
+
+/* ===========================
+        HEADER
+=========================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2rem;
+    border-bottom: 1px solid #ddd;
+}
+/* "T A G A I"  logo in the header */
+.logo {
+    font-size: 3rem;
+    letter-spacing: 20px;
+    margin: 0;
+}
+/* logo responsive tweaks */
+@media (max-width: 900px) {
+    .logo {
+        font-size: 2rem;
+        letter-spacing: 15px;
+    }
+}
+
+
+
+/* ===========================
+        NAVIGATION
+=========================== */
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 1rem;
+}
+
+nav li {
+    font-family: var(--font-primary);
+    font-size: 1.5em;
+    color: var(--main-color);
+}
+
+nav a {
+    position: relative;
+    text-decoration: none;
+    color: var(--main-color);
+    font-weight: 500;
+    padding-bottom: 3px;
+    transition: color 0.3s ease;
+}
+
+/* expanding underline hover animation for nav */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--accent-color);
+}
+/* navigation responsive tweaks */
+@media (max-width: 900px) {
+    nav li {
+        font-size: 1rem;
+        margin-left: 6rem;
+    }
+}
+
+
+.nav-toggle { display: none; }
+.hamburger {
+    display: none; 
+    background: transparent;
+    border: none;
+    width: 44px;
+    height: 36px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 999; 
+}
+.hamburger span {
+    display: block;
+    height: 4px;              
+    width: 28px;             
+    background: var(--main-color); 
+    border-radius: 3px;
+    margin: 3px 0;
+    transition: background 0.15s ease, transform 0.15s ease;
+    box-shadow: none;
+}
+
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+@media (max-width: 900px) {
+    header { position: relative; }
+    .hamburger { display: flex; align-items: center; }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        right: 1.5rem;
+        top: 100%;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        z-index: 50;
+        min-width: 160px;
+    }
+    .nav-links li { margin: 0; }
+    .nav-links a { padding: 0.5rem 0; display: block; }
+
+    
+    .nav-toggle:checked + .hamburger + .nav-links {
+        display: flex;
+    }
+}
+
+
+
+/* ===========================
+        FOOTER
+=========================== */
+
+footer {
+    border-top: 1px solid #e0e0e0;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: var(--light-bg);
+}
+
+/* stacks the copyrighted text, the group text, 
+and sandwiches the "TAGAI" logo */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* custom ver of the header logo re-fitted for the footer */
+footer .logo {
+    font-size: 2.5rem;
+    letter-spacing: 12px;
+    margin: 0.2rem 0;
+    transition: all 0.5s ease;
+    cursor: default;
+}
+/* makes the "TAGAI" logo expand slightly when hovered */
+footer .logo:hover {
+    letter-spacing: 18px;
+    color: #000;
+    transform: scale(1.05);
+}
+
+footer .top-text,
+footer .bottom-text {
+    margin: 0;
+}
+
+footer p {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 1rem;
+}
+/* Footer responsive tweaks */
+@media (max-width: 900px) {
+  footer .logo {
+    font-size: 1rem;
+  }
+  footer p {
+    font-size: 0.65rem;
+  }
+}
+
+
+
+/* ===========================
+        HOME PAGE
+=========================== */
+
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40rem;
+    padding: 10rem 2rem;
+    flex-wrap: wrap;
+}
+.intro-headline h2 {
+    text-align: right;
+    font-size: 5rem;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.1;
+}
+.intro-text p {
+    font-size: 1.5rem;
+    max-width: 25rem;
+    margin: 0;
+    text-align: left;
+}
+.below-intro {
+    background-image: url("home\ page\ img.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30vh 5vw;
+}
+/* intro responsive tweaks */
+@media (max-width: 1800px) {
+  .intro {
+    flex-direction: column;
+    text-align: center;
+    gap: 4rem;
+  }
+  .intro-headline h2 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .intro-text p {
+    text-align: center;
+    font-size: 1rem;
+  }
+  .below-intro {
+    padding: 15vh 2vw;
+  }
+}
+
+
+
+/* ===========================
+                GALLERY PAGE
+     (desktop preserved; responsive only at breakpoints)
+=========================== */
+
+.carousel, .carousel_2 {
+    width: 96%;
+    max-width: none;
+    height: 45rem;
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    margin: 100px auto;
+    padding: 1rem 0;
+}
+.carousel::-webkit-scrollbar,
+.carousel_2::-webkit-scrollbar {
+        display: none;
+}
+.group, .group2 {
+        display: flex;
+        animation: spin 20s infinite linear;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+        padding-right: 1em;
+}
+.group2 { animation: spinjuju 20s infinite linear; }
+
+@keyframes spin {
+        from { transform: translateX(0); }
+        to { transform: translateX(-100%); }
+}
+@keyframes spinjuju {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0%); }
+}
+
+.card {
+        flex: 0 0 12em;
+        height: 15em;
+        font-size: 3rem;
+        background: linear-gradient(270deg, var(--main-color), #fdfdfd);
+        text-align: center;
+        align-content: center;
+        padding: 0.5em;
+}
+.card img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        display: block;
+}
+
+/* =========================
+     Responsive overrides
+     Only apply when viewport is small
+     ========================= */
+@media (max-width: 900px) {
+    /* switch to fluid height so cards can scale */
+    .carousel, .carousel_2 {
+        height: auto;
+        margin: 3rem auto;
+    }
+    .group, .group2 { justify-content: flex-start; gap: 0.6rem; animation-duration: 25s; }
+    .card {
+        flex: 0 0 clamp(7rem, 28vw, 12rem);
+        width: clamp(7rem, 28vw, 12rem);
+        aspect-ratio: 4 / 3;
+        height: auto;
+        font-size: 0.75rem;
+        padding: 0.35em;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel, .carousel_2 { width: 98%; margin: 2rem auto; }
+    .group, .group2 { gap: 0.5rem; animation-duration: 30s; }
+    .card {
+        flex: 0 0 calc(40vw);
+        width: calc(40vw);
+        aspect-ratio: 4 / 3;
+        font-size: 1rem;
+        padding: 0.25em;
+    }
+}
+
+/* styling for the two cards with texts for both carousels */
+.test, .test2, .bott_test, .bott_test2 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    letter-spacing: 7px;
+    font-style: normal;
+    color: white;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+.test { margin-right: 0.5em; }
+.test2 { margin-left: 1em; }
+.bott_test { margin-right: 1em; }
+.bott_test2 { margin-left: 0.5em; }
+
+
+
+/* ===========================
+        ABOUT PAGE
+=========================== */
+
+.about {
+    padding: 4rem 6rem;
+    background: var(--light-bg);
+    color: var(--main-color);
+}
+/* top part of the group objective area */
+.about-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 5rem;
+    margin: 5rem 0 3rem;
+}
+.about-text {
+    max-width: 35%;
+    font-size: 1.35rem;
+    line-height: 1.7;
+}
+
+.about-essence {
+    text-align: left;
+    margin-right: 2rem;
+}
+.about-essence h1 {
+    font-size: 6.5rem;
+    font-weight: 600;
+    
+}
+.about-essence h2 {
+    font-size: 6rem;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: 5px;
+    line-height: 1.25;
+}
+.about-essence .underline {
+    width: 49rem;
+    height: 5px;
+    background-color: var(--main-color);
+    margin: 0.5rem 0.5 1rem auto;
+}
+.about-essence span {
+    margin-left: 10rem;
+}
+
+/* img serving as divider */
+.about-image img {
+    width: 100%;
+    margin: 8rem 0;
+    display: block;
+}
+
+/* bottom part of the group objective area */
+.about-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
+}
+.about-heading h2 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 10px;
+}
+.about-description {
+    max-width: 30%;
+    font-size: 1.5rem;
+    line-height: 1.7;
+    text-align: left;
+}
+
+/* group objective area of the about section responsive tweaks */
+@media (max-width: 1900px) {
+    .about {
+    padding: 2rem;
+  }
+  .about-top, .about-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-text, .about-description {
+    max-width: 100%;
+    text-align: center;
+  }
+  .about-essence {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  .about-essence h1 { font-size: 2.5rem; }
+  .about-essence h2 { font-size: 2rem; }
+  .about-essence span { margin-left: 1rem; }
+  .about-essence .underline {
+    margin: 0.5rem auto 1rem auto;
+    width: 10rem;
+  }
+  .about-heading h2 {
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+/* finally, the group members area of the about page */
+.about-team {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.about-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 4rem 2rem;
+    justify-items: center;
+}
+
+.team-heading {
+    font-family: var(--font-primary);
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--main-color);
+    letter-spacing: 5px;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.team-heading::after {
+    content: "";
+    display: block;
+    width: 6rem;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 0.8rem auto 0 auto;
+    border-radius: 2px;
+}
+
+.artist-card {
+    background: #fff;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    max-width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.artist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px #00000014;
+}
+.artist-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 2px solid #ccc;
+}
+.artist-card h2 {
+    color: var(--main-color);
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+}
+.artist-card p {
+    color: #4b4a4a;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: justify;
+}
+/* group members area of the about page responsive tweaks */
+@media (max-width: 768px) {
+    .intro {
+        padding: 6rem 1.5rem;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .artist-photo {
+        width: 100px;
+        height: 100px;
+    }
+    .team-heading {
+        font-size: 2rem;
+        letter-spacing: 3px;
+  }
+}
