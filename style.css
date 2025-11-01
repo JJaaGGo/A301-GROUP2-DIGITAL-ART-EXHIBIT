@@ -362,7 +362,6 @@ footer p {
         background: linear-gradient(270deg, var(--main-color), #fdfdfd);
         text-align: center;
         align-content: center;
-        padding: 0.5em;
 }
 .card img {
         height: 100%;
@@ -610,4 +609,5 @@ footer p {
         font-size: 2rem;
         letter-spacing: 3px;
   }
+
 }
